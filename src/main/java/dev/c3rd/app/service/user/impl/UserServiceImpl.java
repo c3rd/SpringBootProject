@@ -1,6 +1,5 @@
 package dev.c3rd.app.service.user.impl;
 
-import dev.c3rd.app.exception.customer.CustomerNotFoundException;
 import dev.c3rd.app.exception.user.UserNotFoundException;
 import dev.c3rd.app.model.user.User;
 import dev.c3rd.app.repository.UserRepository;
