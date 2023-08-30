@@ -4,11 +4,15 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import dev.c3rd.app.model.user.User;
 import dev.c3rd.app.model.user.UserModelAssembler;
+import dev.c3rd.app.service.auth.ITokenService;
 import dev.c3rd.app.service.user.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +54,7 @@ public class UserController {
 
     @PutMapping("{id}")
     public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable Long id) {
+
         User updatedUser = userService.updateUser(user, id);
 
         EntityModel<User> updatedUserModel = assembler.toModel(updatedUser);

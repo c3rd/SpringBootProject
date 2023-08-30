@@ -4,6 +4,7 @@ import dev.c3rd.app.exception.user.UserNotFoundException;
 import dev.c3rd.app.model.user.User;
 import dev.c3rd.app.repository.UserRepository;
 import dev.c3rd.app.service.user.IUserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,10 +38,8 @@ public class UserServiceImpl implements IUserService {
 
         User existingUser = repository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found."));
 
-        existingUser.setUsername(user.getUsername());
-        existingUser.setPassword(user.getPassword());
+        existingUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         existingUser.setEmail(user.getEmail());
-        existingUser.setRole(user.getRole());
 
         repository.save(existingUser);
 
