@@ -53,4 +53,5 @@ public class UserServiceImpl implements IUserService {
         repository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found."));
         repository.deleteById(id);
     }
+
 }
